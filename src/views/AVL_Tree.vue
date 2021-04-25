@@ -1,6 +1,7 @@
 <template>
     <div class="avl_tree_section">
         <div class="container">
+            <button class="test_button" @click="addRandomElement">Добавить случайный элемент</button>
             <div id="svg_container" class="svg_container">
                 <svg class="canvas"></svg>
                 <Element_popup
@@ -39,18 +40,19 @@
                     bottom: 50,
                     left: 90
                 },
-                popupParams:{
-                  id: undefined,
-                  surname:undefined,
-                  name: undefined,
-                  patronymic: undefined,
-                  age: undefined,
-                  anchor: undefined
-                }
+                popupParams: {
+                    id: undefined,
+                    surname: undefined,
+                    name: undefined,
+                    patronymic: undefined,
+                    age: undefined,
+                    anchor: undefined
+                },
             }
         },
         mounted() {
-            window.addEventListener('resize',this.drawTree)
+            window.addEventListener('resize', this.drawTree)
+            this.drawTree()
         },
         methods: {
             addElement: function (data) {
@@ -123,6 +125,7 @@
                 const treeData = bst.root.json
 
                 const svg_container = document.querySelector("#svg_container")
+                if (!svg_container) return;
 
                 const width = svg_container.clientWidth - 10 - this.margin.left - this.margin.right
                 const height = svg_container.clientHeight - 10 - this.margin.top - this.margin.bottom
@@ -220,19 +223,61 @@
             },
             elementUnhover: function () {
                 this.popupParams = {
-                    id:undefined,
-                    surname:undefined,
-                    name:undefined,
-                    patronymic:undefined,
-                    age:undefined,
-                    anchor:undefined
+                    id: undefined,
+                    surname: undefined,
+                    name: undefined,
+                    patronymic: undefined,
+                    age: undefined,
+                    anchor: undefined
                 }
+            },
+            getRandomIntInclusive: function (min, max) {
+                min = Math.ceil(min);
+                max = Math.floor(max);
+                return Math.floor(Math.random() * (max - min + 1)) + min; //Максимум и минимум включаются
+            },
+            addRandomElement: function () {
+                const ctx = this
+                fetch("randomInfo.json").then(response => response.json()).then(function (json) {
+                    const data = {
+                        id: ctx.getRandomIntInclusive(1, 999).toString(),
+                        surname: json.surnames[ctx.getRandomIntInclusive(0, json.surnames.length - 1)].toString(),
+                        name: json.names[ctx.getRandomIntInclusive(0, json.names.length - 1)].toString(),
+                        patronymic: json.patronymics[ctx.getRandomIntInclusive(0, json.patronymics.length - 1)].toString(),
+                        age: ctx.getRandomIntInclusive(1, 120).toString()
+                    }
+                    bst.InsertVal(data)
+                    ctx.drawTree()
+                })
             }
         }
     }
 </script>
 
 <style scoped>
+    .test_button {
+        width: 120px;
+        opacity: 0;
+        position: absolute;
+        top: 100px;
+        left: 5vw;
+        padding: 5px 10px;
+        background-color: white;
+        border: 2px solid gray;
+        font-weight: bold;
+        font-size: 1.05rem;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: 0.1s;
+    }
+
+    .test_button:hover {
+        opacity: 1;
+        background-color: gray;
+        color: black;
+        border: 2px solid black;
+    }
+
     .avl_tree_section {
         display: flex;
         justify-content: center;
