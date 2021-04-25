@@ -7,6 +7,6 @@ const app = express()
 
 app.use(enforce.HTTPS({trustProtoHeader: true}))
 app.use(serveStatic(__dirname + '/dist'))
-app.use(history())
+app.use(history({verbose: true}))
 
 app.listen(process.env.PORT || 5000)
