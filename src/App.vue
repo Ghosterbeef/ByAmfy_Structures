@@ -1,7 +1,7 @@
 <template>
     <div id="nav">
         <div class="container">
-            <router-link to="/Home">Пользовательские структуры данных в языке <span>javascript</span></router-link>
+            <router-link to="/">Пользовательские структуры данных в языке <span>javascript</span></router-link>
         </div>
     </div>
     <router-view/>
@@ -11,7 +11,6 @@
 
 <script>
     import Footer from './components/Footer'
-
     export default {
         name: 'App',
         components: {
@@ -39,13 +38,14 @@
         justify-content: center;
         min-height: 100vh;
         min-width: 100vw;
+        overflow: hidden;
     }
 
     #nav {
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: 30px;
+        padding: 30px 0;
     }
 
     #nav a {
@@ -59,7 +59,7 @@
     }
 
     .container {
-        min-width: 70vw;
+        min-width: 60vw;
         max-width: 1000px;
         display: flex;
         flex-direction: column;

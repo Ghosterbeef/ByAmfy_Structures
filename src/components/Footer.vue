@@ -25,7 +25,7 @@
     footer {
         display: flex;
         justify-content: center;
-        width: 100vw;
+        min-width: 100vw;
         background-color: #475050;
         text-align: center;
         padding: 20px 0;

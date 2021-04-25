@@ -3,7 +3,7 @@ import Home from '../views/Home'
 
 const routes = [
   {
-    path: '/Home',
+    path: '/',
     name: 'Домашняя',
     component: Home
   },
@@ -13,7 +13,7 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/BTree.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/AVL_Tree')
   },
   {
     path: '/b_tree',
