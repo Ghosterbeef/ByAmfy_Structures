@@ -37,7 +37,7 @@
         grid-template-rows: max-content 1fr max-content;
         justify-content: center;
         min-height: 100vh;
-        min-width: 100vw;
+        min-width: 300px;
         overflow: hidden;
     }
 
@@ -64,5 +64,6 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        justify-content: space-evenly;
     }
 </style>

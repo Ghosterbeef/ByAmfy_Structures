@@ -3,6 +3,14 @@
         <div class="container">
             <div id="svg_container" class="svg_container">
                 <svg class="canvas"></svg>
+                <Element_popup
+                        :id="popupParams.id"
+                        :surname="popupParams.surname"
+                        :name="popupParams.name"
+                        :patronymic="popupParams.patronymic"
+                        :age="popupParams.age"
+                        :anchor="popupParams.anchor" v-if="popupParams.id">
+                </Element_popup>
             </div>
             <ControlPanel @addElement="addElement" @updateElement="updateElement"
                           @deleteElement="deleteElement"></ControlPanel>
@@ -13,12 +21,14 @@
 <script>
     // @ is an alias to /src
     import {bst} from "../vendor/BST_AVL";
-    import ControlPanel from '../components/Avl_tree_control_panel'
+    import ControlPanel from '../components/AVL_Tree_components/Avl_tree_control_panel'
     import * as d3 from "d3/dist/d3"
+    import Element_popup from "../components/AVL_Tree_components/Element_popup";
 
     export default {
         name: 'Home',
         components: {
+            Element_popup,
             ControlPanel,
         },
         data() {
@@ -28,11 +38,19 @@
                     right: 90,
                     bottom: 50,
                     left: 90
+                },
+                popupParams:{
+                  id: undefined,
+                  surname:undefined,
+                  name: undefined,
+                  patronymic: undefined,
+                  age: undefined,
+                  anchor: undefined
                 }
             }
         },
         mounted() {
-            window.addEventListener('resize', this.drawTree)
+            window.addEventListener('resize',this.drawTree)
         },
         methods: {
             addElement: function (data) {
@@ -73,7 +91,6 @@
                             age: data.age || element.value.age
                         }
                         this.drawTree()
-                        console.log(bst.root)
                     } else {
                         //Вывести ошибку что такой элемент отсутствует
                         //Пока что алерт
@@ -99,7 +116,9 @@
             },
             drawTree: function () {
                 d3.select("svg").remove()
-                if (!bst.root) return
+                if (!bst.root) {
+                    return
+                }
 
                 const treeData = bst.root.json
 
@@ -112,7 +131,7 @@
 
                 nodes = treeMap(nodes)
 
-                const svg = d3.select("#svg_container").append("svg")
+                const svg = d3.select("#svg_container").append("svg").attr("class", "canvas")
                     .attr("width", width + this.margin.left + this.margin.right)
                     .attr("height", height + this.margin.top + this.margin.bottom)
 
@@ -160,9 +179,9 @@
 
                 node.append("circle")
                     .attr("r", 15)
-                .style("fill", "#6d7373")
-                .style("stroke", "hotpink")
-                .style("stroke-width", "2px")
+                    .style("fill", "#6d7373")
+                    .style("stroke", "hotpink")
+                    .style("stroke-width", "2px")
 
                 node.append("text")
                     .attr("dy", ".35em")
@@ -186,11 +205,28 @@
                     })
                     .style("fill", "hotpink")
             },
-            elementHover: function () {
-
+            elementHover: function (e) {
+                const target = e.target.parentNode.querySelector("text")
+                const node = bst.Search(target.textContent)
+                const anchor = e.target.parentNode.querySelector("text:last-child")
+                this.popupParams = {
+                    id: node.value.id,
+                    surname: node.value.surname,
+                    name: node.value.name,
+                    patronymic: node.value.patronymic,
+                    age: node.value.age,
+                    anchor: anchor.getBoundingClientRect()
+                }
             },
             elementUnhover: function () {
-
+                this.popupParams = {
+                    id:undefined,
+                    surname:undefined,
+                    name:undefined,
+                    patronymic:undefined,
+                    age:undefined,
+                    anchor:undefined
+                }
             }
         }
     }
@@ -202,10 +238,10 @@
         justify-content: center;
     }
 
-    .svg_container {
+    #svg_container {
         min-height: 50vh;
         width: 100%;
-        border: 1px solid gray;
     }
+
 
 </style>

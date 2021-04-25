@@ -1,11 +1,11 @@
 <template>
     <div class="control_panel">
-        <form>
-            <input class="getId" type="number" placeholder="id" v-model="formData.id">
+        <form @submit.prevent="addElement">
+            <input class="getId" type="number" placeholder="id" v-model="formData.id" max="999">
             <input class="getSurname" type="text" placeholder="Фамилия" v-model="formData.surname">
             <input class="getName" type="text" placeholder="Имя" v-model="formData.name">
             <input class="getPatronymic" type="text" placeholder="Отчество" v-model="formData.patronymic">
-            <input class="getAge" type="number" placeholder="Возраст" v-model="formData.age">
+            <input class="getAge" type="number" placeholder="Возраст" v-model="formData.age" max="999">
         </form>
         <button class="addElement-btn" @click.prevent="addElement">Добавить</button>
         <button class="updateElement-btn" @click.prevent="updateElement">Изменить</button>
@@ -116,15 +116,15 @@
     form {
         margin-top: 20px;
         display: flex;
-        flex-direction: column;
-        align-items: center;
+        flex-wrap: wrap;
         justify-content: space-evenly;
+        align-items: center;
         width: 100%;
-        height: 20vh;
     }
 
     input {
         padding: 5px 10px;
+        margin: 5px 0;
         color: black;
         border: 2px solid gray;
         transition: 0.1s;
