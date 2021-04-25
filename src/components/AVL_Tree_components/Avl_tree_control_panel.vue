@@ -7,9 +7,9 @@
             <input class="getPatronymic" type="text" placeholder="Отчество" v-model="formData.patronymic">
             <input class="getAge" type="number" placeholder="Возраст" v-model="formData.age" max="999">
         </form>
-        <button class="addElement-btn" @click.prevent="addElement">Добавить</button>
-        <button class="updateElement-btn" @click.prevent="updateElement">Изменить</button>
-        <button class="deleteElement-btn" @click.prevent="deleteElement">Удалить</button>
+        <button class="addElement-btn" @click.prevent="addElement" @mouseup="deleteFocus">Добавить</button>
+        <button class="updateElement-btn" @click.prevent="updateElement" @mouseup="deleteFocus">Изменить</button>
+        <button class="deleteElement-btn" @click.prevent="deleteElement" @mouseup="deleteFocus">Удалить</button>
     </div>
 </template>
 
@@ -59,6 +59,9 @@
                 }
                 this.$emit("deleteElement", this.formData)
                 this.formData.age = this.formData.id = this.formData.surname = this.formData.name = this.formData.patronymic = ""
+            },
+            deleteFocus: function (e) {
+                e.target.blur()
             }
         }
     }
@@ -73,6 +76,7 @@
     }
 
     button {
+        outline: none;
         margin: 20px 0;
         padding: 5px 10px;
         background-color: white;
@@ -98,17 +102,17 @@
         color: red;
     }
 
-    .addElement-btn:hover {
+    .addElement-btn:hover,.addElement-btn:focus {
         color: white;
         background-color: lime;
     }
 
-    .updateElement-btn:hover {
+    .updateElement-btn:hover,.updateElement-btn:focus {
         color: white;
         background-color: blueviolet;
     }
 
-    .deleteElement-btn:hover {
+    .deleteElement-btn:hover,.deleteElement-btn:focus {
         color: white;
         background-color: red;
     }
