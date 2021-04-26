@@ -2,7 +2,7 @@
     <div class="avl_tree_section">
         <div class="container">
             <button class="test_button" @click="addRandomElement">Добавить случайный элемент</button>
-            <div id="svg_container" class="svg_container">
+            <div id="avl_svg_container" class="avl_svg_container">
                 <svg class="canvas"></svg>
                 <Element_popup
                         :id="popupParams.id"
@@ -22,7 +22,7 @@
 <script>
     // @ is an alias to /src
     import {bst} from "../vendor/BST_AVL";
-    import ControlPanel from '../components/AVL_Tree_components/Avl_tree_control_panel'
+    import ControlPanel from '../components/AVL_Tree_components/Control_panel'
     import * as d3 from "d3/dist/d3"
     import Element_popup from "../components/AVL_Tree_components/Element_popup";
 
@@ -124,17 +124,18 @@
 
                 const treeData = bst.root.json
 
-                const svg_container = document.querySelector("#svg_container")
+                const svg_container = document.querySelector("#avl_svg_container")
                 if (!svg_container) return;
 
                 const width = svg_container.clientWidth - 10 - this.margin.left - this.margin.right
                 const height = svg_container.clientHeight - 10 - this.margin.top - this.margin.bottom
                 const treeMap = d3.tree().size([width, height])
                 let nodes = d3.hierarchy(treeData)
+                console.log(treeData)
 
                 nodes = treeMap(nodes)
 
-                const svg = d3.select("#svg_container").append("svg").attr("class", "canvas")
+                const svg = d3.select("#avl_svg_container").append("svg").attr("class", "canvas")
                     .attr("width", width + this.margin.left + this.margin.right)
                     .attr("height", height + this.margin.top + this.margin.bottom)
 
@@ -283,7 +284,7 @@
         justify-content: center;
     }
 
-    #svg_container {
+    #avl_svg_container {
         min-height: 50vh;
         width: 100%;
     }
