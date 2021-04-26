@@ -23,7 +23,7 @@
         },
         data() {
             const defaultOrder = 2
-            const Tree = btree.create(defaultOrder)
+            const Tree = btree.create(defaultOrder,btree.numcmp)
             return {
                 currentOrder: defaultOrder,
                 bTree: new Tree(),
@@ -37,7 +37,7 @@
         },
         methods: {
             addElement: function (data) {
-                this.bTree.put(data.id, {
+                this.bTree.put(parseInt(data.id), {
                     surname: data.surname,
                     name: data.name,
                     patronymic: data.patronymic,
@@ -55,7 +55,7 @@
                 this.drawTree()
             },
             updateElement: function (data) {
-                let searchResult = this.bTree.get(data.id)
+                let searchResult = this.bTree.get(parseInt(data.id))
                 if (searchResult === undefined || !searchResult) {
                     //Вывести сообщение об отсутствии элемента с таким id
                     //Пока alert
@@ -73,7 +73,7 @@
                 this.bTree.print()
             },
             deleteElement: function (data) {
-                let searchResult = this.bTree.get(data.id)
+                let searchResult = this.bTree.get(parseInt(data.id))
                 if (searchResult === undefined || !searchResult) {
                     //Вывести сообщение об отсутствии элемента с таким id
                     //Пока alert
@@ -84,7 +84,7 @@
                     && searchResult.value.name === (data.name || searchResult.value.name)
                     && searchResult.value.patronymic === (data.patronymic || searchResult.value.patronymic)
                     && searchResult.value.age === (data.age || searchResult.value.age)) {
-                    this.bTree.del(data.id)
+                    this.bTree.del(parseInt(data.id))
                     console.clear()
                     console.log(this.bTree)
                     this.bTree.print()
@@ -188,7 +188,7 @@
                     .on('mouseout', this.elementUnhover)
 
                 node.append("circle")
-                    .attr("r", 15)
+                    .attr("r", 25)
                     .style("fill", "#6d7373")
                     .style("stroke", "hotpink")
                     .style("stroke-width", "2px")
@@ -200,20 +200,22 @@
                     })
                     .style("text-anchor", "middle")
                     .text(function (d) {
-                        return d.data.name[0].key;
+                        let string = ""
+                        d.data.name.forEach(item => string+= item.key + ",")
+                        return string
                     })
                     .style("fill", "hotpink")
-                node.append("text")
-                    .attr("dy", ".35em")
-                    .attr("y", function () {
-                        return 0;
-                    })
-                    .style("text-anchor", "start")
-                    .attr("x", 20)
-                    .text(function (d) {
-                        return d.data.name[0].value.name;
-                    })
-                    .style("fill", "hotpink")
+                // node.append("text")
+                //     .attr("dy", ".35em")
+                //     .attr("y", function () {
+                //         return 0;
+                //     })
+                //     .style("text-anchor", "start")
+                //     .attr("x", 20)
+                //     .text(function (d) {
+                //         return d.data.name[0].value.name;
+                //     })
+                //     .style("fill", "hotpink")
             }
         }
     }
