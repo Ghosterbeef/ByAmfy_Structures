@@ -1,6 +1,8 @@
 import {createRouter, createWebHistory} from 'vue-router'
 import Home from '../views/Home'
-
+import AVL_Tree from "../views/AVL_Tree";
+import BTree from "../views/BTree";
+import HashTable from "../views/HashTable";
 const routes = [
     {
         path: '/',
@@ -15,19 +17,22 @@ const routes = [
         // route level code-splitting
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
-        component: () => import(/* webpackChunkName: "about" */ '../views/AVL_Tree')
+        component: AVL_Tree
+        //component: () => import(/* webpackChunkName: "about" */ '../views/AVL_Tree')
     },
     {
         path: '/b_tree',
         name: 'B дерево',
         meta: {title: "B-дерево"},
-        component: () => import('../views/BTree')
+        component: BTree
+        //component: () => import('../views/BTree')
     },
     {
         path: '/hash_table',
         name: 'Хеш-таблица',
         meta: {title: "Хеш-таблица"},
-        component: () => import('../views/HashTable')
+        component: HashTable
+        //component: () => import('../views/HashTable')
     },
     {
         path: '/NotFound',
