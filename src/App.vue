@@ -5,7 +5,7 @@
             <router-link to="/">Пользовательские структуры данных в языке <span>javascript</span></router-link>
         </div>
     </div>
-    <router-view/>
+    <router-view @pageMounted="isLoaded=true" @pageLoading="isLoaded=false"/>
     <Footer></Footer>
 </template>
 
@@ -13,11 +13,12 @@
 <script>
     import Footer from './components/Footer'
     import Preloader from "./components/Preloader";
+
     export default {
         name: 'App',
         components: {
-            Preloader,
             Footer,
+            Preloader,
         }
     }
 </script>

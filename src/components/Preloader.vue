@@ -10,14 +10,14 @@
 <script>
     export default {
         name: "Preloader",
-        data() {
-            return {
-                isLoaded: false
-            }
+        data(){
+          return{
+              isLoaded: false
+          }
         },
         mounted() {
             document.onreadystatechange = () => {
-                if (document.readyState === 'complete') {
+                if (document.readyState === 'complete'){
                     this.isLoaded = true
                 }
             }
@@ -36,7 +36,7 @@
         left: 0;
         width: 100vw;
         height: 100vh;
-        background-color: #333;
+        background-color: white;
         z-index: 999;
     }
 

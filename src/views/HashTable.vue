@@ -5,9 +5,11 @@
 </template>
 
 <script>
+
     export default {
-        name: "HashTable"
+        name: "HashTable",
     }
+
 </script>
 
 <style scoped>

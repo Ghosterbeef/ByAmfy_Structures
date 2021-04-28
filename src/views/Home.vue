@@ -2,7 +2,7 @@
     <div class="home-section">
         <div class="container">
             <nav>
-                <router-link to="/avl_tree">
+                <router-link to="/avl_tree" @click="linkClicked">
                     <h2>AVL дерево</h2>
                 </router-link>
                 <router-link to="/b_tree">
@@ -18,7 +18,7 @@
 
 <script>
     export default {
-        name: "Home"
+        name: "Home",
     }
 </script>
 
