@@ -68,7 +68,6 @@
                     patronymic: data.patronymic,
                     age: data.age
                 })
-                bTree.print()
                 this.drawTree()
             },
             updateElement: function (data) {
@@ -80,12 +79,12 @@
                     return
                 }
                 searchResult.value = {
-                    surname: data.surname,
-                    name: data.name,
-                    patronymic: data.patronymic,
-                    age: data.age
+                    surname: (data.surname || searchResult.value.surname),
+                    name: (data.name || searchResult.value.name),
+                    patronymic: (data.patronymic || searchResult.value.patronymic),
+                    age: (data.age || searchResult.value.age)
                 }
-                bTree.print()
+                this.drawTree()
             },
             deleteElement: function (data) {
                 let searchResult = bTree.get(parseInt(data.id))
@@ -100,7 +99,7 @@
                     && searchResult.value.patronymic === (data.patronymic || searchResult.value.patronymic)
                     && searchResult.value.age === (data.age || searchResult.value.age)) {
                     bTree.del(parseInt(data.id))
-                    bTree.print()
+                    this.drawTree()
                     return;
                 }
                 //Вывести сообщение об отсутствии элемента с таким id
