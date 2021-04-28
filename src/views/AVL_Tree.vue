@@ -24,7 +24,7 @@
     import {bst} from "../vendor/BST_AVL";
     import ControlPanel from '../components/AVL_Tree_components/Control_panel'
     import * as d3 from "d3/dist/d3"
-    import Element_popup from "../components/AVL_Tree_components/Element_popup";
+    import Element_popup from "../components/Element_popup";
 
     export default {
         name: 'Home',
@@ -117,7 +117,7 @@
                 alert("Елемент с такими данными отсутствует")
             },
             drawTree: function () {
-                d3.select("svg").remove()
+                d3.select("#avl_svg_container svg").remove()
                 if (!bst.root) {
                     return
                 }
