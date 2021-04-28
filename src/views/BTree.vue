@@ -25,7 +25,7 @@
     import ControlPanel from "../components/AVL_Tree_components/Control_panel"
     import Element_popup from "../components/Element_popup";
     import * as btree from "../vendor/btree"
-    import * as d3 from "d3/dist/d3"
+    import * as d3 from "d3/dist/d3.min"
 
 
     const defaultOrder = 2

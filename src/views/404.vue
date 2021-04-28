@@ -4,7 +4,7 @@
             <div class="message">
                 <h1>Такую страничку не сделала =)</h1>
                 <h2>Простите, у меня лапки!</h2>
-                <img src="../assets/Cat.svg" alt="Cat">
+                <img src="../assets/Cat.png" alt="Cat">
             </div>
         </div>
     </div>

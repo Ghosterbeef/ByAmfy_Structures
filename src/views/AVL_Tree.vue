@@ -23,7 +23,7 @@
     // @ is an alias to /src
     import {bst} from "../vendor/BST_AVL";
     import ControlPanel from '../components/AVL_Tree_components/Control_panel'
-    import * as d3 from "d3/dist/d3"
+    import * as d3 from "d3/dist/d3.min"
     import Element_popup from "../components/Element_popup";
 
     export default {
