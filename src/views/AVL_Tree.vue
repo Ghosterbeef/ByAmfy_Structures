@@ -205,7 +205,7 @@
                     .style("text-anchor", "start")
                     .attr("x", 20)
                     .text(function (d) {
-                        return d.data.name.name;
+                        return d.data.name.surname;
                     })
                     .style("fill", "hotpink")
             },

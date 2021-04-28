@@ -2,6 +2,7 @@
     <div class="b_tree_section">
         <div class="container">
             <button class="test_button" @click="addRandomElement">Добавить случайный элемент</button>
+            <input type="number" name="orderSelect" class="orderSelect" id="orderSelect" @change="orderChange" v-model="currentOrder">
             <div id="b_svg_container" class="b_svg_container">
                 <svg class="canvas"></svg>
                 <Element_popup
@@ -29,7 +30,7 @@
 
     const defaultOrder = 2
     const Tree = btree.create(defaultOrder, btree.numcmp)
-    export const bTree = new Tree()
+    export let bTree = new Tree()
 
     export default {
         name: "BTree",
@@ -107,17 +108,22 @@
                 alert("Элемент с такими доп. данными отсутствует!")
             },
             orderChange: function () {
-                // if (parseInt(orderSelect.value) < 2 || orderSelect.value == "")
-                //     return
-                // let TempBTree = new Tree()
-                // MyBTree.walk(null, null, function (key, value) {
-                //     TempBTree.put(key, value)
-                // })
-                // Tree = btree.create(parseInt(orderSelect.value), btree.numcmp)
-                // MyBTree = new Tree()
-                // TempBTree.walk(null, null, function (key, value) {
-                //     MyBTree.put(key, value)
-                // })
+                if (typeof this.currentOrder !== 'number'){
+                    this.currentOrder = parseInt(this.currentOrder)
+                }
+                if (this.currentOrder < 2 || this.currentOrder == "")
+                    return
+                let Tree = btree.create(defaultOrder, btree.numcmp)
+                let TempBTree = new Tree()
+                    bTree.walk(null, null, function (key, value) {
+                    TempBTree.put(key, value)
+                })
+                Tree = btree.create(this.currentOrder, btree.numcmp)
+                bTree = new Tree()
+                TempBTree.walk(null, null, function (key, value) {
+                    bTree.put(key, value)
+                })
+                this.drawTree()
             },
             drawTree: function () {
                 d3.select("#b_svg_container svg").remove()
@@ -339,6 +345,28 @@
     }
 
     .test_button:hover {
+        opacity: 1;
+        background-color: gray;
+        color: black;
+        border: 2px solid black;
+    }
+
+    .orderSelect{
+        width: 120px;
+        opacity: 0;
+        position: absolute;
+        top: 180px;
+        left: 5vw;
+        padding: 5px 10px;
+        background-color: white;
+        border: 2px solid gray;
+        font-weight: bold;
+        font-size: 1.05rem;
+        border-radius: 5px;
+        transition: 0.1s;
+    }
+
+    .orderSelect:hover {
         opacity: 1;
         background-color: gray;
         color: black;
