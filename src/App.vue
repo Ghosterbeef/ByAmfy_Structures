@@ -1,4 +1,5 @@
 <template>
+    <Preloader></Preloader>
     <div id="nav">
         <div class="container">
             <router-link to="/">Пользовательские структуры данных в языке <span>javascript</span></router-link>
@@ -11,9 +12,11 @@
 
 <script>
     import Footer from './components/Footer'
+    import Preloader from "./components/Preloader";
     export default {
         name: 'App',
         components: {
+            Preloader,
             Footer,
         }
     }
