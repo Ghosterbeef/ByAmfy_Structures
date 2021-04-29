@@ -178,7 +178,7 @@
                             " " + d.parent.x + "," + d.parent.y;
                     })
                     .style("fill", "none")
-                    .style("stroke", "hotpink")
+                    .style("stroke", "#69BEEB")
                     .style("stroke-width", "2px")
 
                 const node = g.selectAll(".node")

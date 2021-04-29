@@ -187,11 +187,21 @@
                     let prevElement = this.searchPrevElement(result, searchResult)
                     if (prevElement === -1) {
                         hashTable[hash] = searchResult.next
-                        trashCan.unshift(data)
+                        trashCan.unshift({
+                            surname: data.surname,
+                            name: data.name,
+                            patronymic: data.patronymic,
+                            age: data.age,
+                        })
                         searchResult = null
                     } else {
                         prevElement.next = searchResult.next
-                        trashCan.unshift(data)
+                        trashCan.unshift({
+                            surname: data.surname,
+                            name: data.name,
+                            patronymic: data.patronymic,
+                            age: data.age,
+                        })
                         searchResult = null
                     }
                 }

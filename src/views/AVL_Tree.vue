@@ -166,7 +166,7 @@
                             " " + d.parent.x + "," + d.parent.y;
                     })
                     .style("fill", "none")
-                    .style("stroke", "hotpink")
+                    .style("stroke", "#69BEEB")
                     .style("stroke-width", "2px")
 
                 const node = g.selectAll(".node")
@@ -182,8 +182,8 @@
                     .on('mouseout', this.elementUnhover)
 
                 node.append("circle")
-                    .attr("r", 15)
-                    .style("fill", "#6d7373")
+                    .attr("r", 17)
+                    .style("fill", "#4e4e4e")
                     .style("stroke", "hotpink")
                     .style("stroke-width", "2px")
 
