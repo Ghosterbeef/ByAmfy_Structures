@@ -1,5 +1,5 @@
 <template>
-    <div class="table_element">
+    <div class="table_element" @click="onElementClick">
         <p class="element_text">{{hash}}</p>
         <p class="element_text">{{surname}}</p>
         <p class="element_text">{{name}}</p>
@@ -11,48 +11,66 @@
 <script>
     export default {
         name: "Hash_table_element",
-        props:{
-            hash:{
+        props: {
+            hash: {
                 type: String,
                 required: true
             },
-            surname:{
+            surname: {
                 type: String,
                 required: true
             },
-            name:{
+            name: {
                 type: String,
                 required: true
             },
-            patronymic:{
+            patronymic: {
                 type: String,
                 required: true
             },
-            age:{
+            age: {
                 type: String,
                 required: true
+            }
+        },
+        methods: {
+            onElementClick: function (e) {
+                let data
+                if (e.target.tagName !== "div")
+                    data = {
+                    surname: e.target.closest("div").childNodes[1].textContent,
+                    name: e.target.closest("div").childNodes[2].textContent,
+                    patronymic: e.target.closest("div").childNodes[3].textContent,
+                    age: e.target.closest("div").childNodes[4].textContent}
+                else
+                    data = {
+                        surname: e.target.childNodes[1].textContent,
+                        name: e.target.childNodes[2].textContent,
+                        patronymic: e.target.childNodes[3].textContent,
+                        age: e.target.childNodes[4].textContent}
+                this.$emit('onElementClick', data, e)
             }
         }
     }
 </script>
 
 <style>
-    .table_element{
+    .table_element {
         display: grid;
         grid-template-columns: repeat(5, 1fr);
-        margin: 5px 0 5px ;
+        margin: 5px 0 5px;
         background-color: white;
     }
 
-    .table_element:hover{
+    .table_element:hover {
         background-color: #8CC271;
     }
 
-    .element_text{
+    .element_text {
         border: 1px solid black;
         text-align: center;
         color: black;
-        text-overflow:ellipsis;
+        text-overflow: ellipsis;
     }
 
 </style>

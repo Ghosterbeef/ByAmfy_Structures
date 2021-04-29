@@ -1,6 +1,10 @@
 <template>
     <div class="hash-table_section">
         <div class="container">
+            <Element_popup v-if="dataToPopup?.data" :data-to-popup="dataToPopup" @deleteElementFromPopup="function(data) {
+                deleteElement(data)
+                hidePopup()
+            }"></Element_popup>
             <button class="test_button" @click="addRandomElement">Добавить случайный элемент</button>
             <div class="hash_table">
                 <div class="hash_table_header">
@@ -41,7 +45,7 @@
                                         :surname="elements.surname"
                                         :name="elements.name"
                                         :patronymic="elements.patronymic"
-                                        :age="elements.age">
+                                        :age="elements.age" @onElementClick="showPopup">
                     </Hash_table_element>
                 </div>
             </div>
@@ -49,7 +53,7 @@
                 <Hash_table_control_panel @addElement="addElement" @searchElement="searchElement"
                                           @deleteElement="deleteElement">
                 </Hash_table_control_panel>
-                <button class="search_cancellation" v-if="isSearched" @click="cancelSearch">
+                <button class="search_cancellation" v-if="isSearched" @click.stop="cancelSearch">
                     <img src="../assets/cross.svg" alt="Крестик"></button>
             </div>
         </div>
@@ -59,6 +63,7 @@
 <script>
     import Hash_table_control_panel from "../components/Hash_table_components/Hash_table_control_panel";
     import Hash_table_element from "../components/Hash_table_components/Hash_table_element";
+    import Element_popup from "../components/Hash_table_components/Element_popup";
 
     let hashTable = {}
 
@@ -66,7 +71,9 @@
         name: "HashTable",
         components: {
             Hash_table_control_panel,
-            Hash_table_element
+            Hash_table_element,
+            Element_popup
+
         },
         data() {
             return {
@@ -75,10 +82,25 @@
                     type: "default",
                     counter: 0
                 },
-                isSearched: false
+                isSearched: false,
+                dataToPopup: {
+                    data: null,
+                    coords: {
+                        x: null,
+                        y: null
+                    }
+                }
             }
         },
         mounted() {
+            let ctx = this
+            document.addEventListener("click", function (e) {
+                if (e.target.className === "table_element" ||
+                    e.target.closest("div").className === "table_element") {
+                    return
+                }
+                else ctx.hidePopup()
+            })
             this.hashFunction({
                 surname: "Вахнин",
                 name: "Антон",
@@ -462,6 +484,24 @@
             cancelSearch: function () {
                 this.isSearched = false
                 this.getElementsToDraw()
+            },
+            showPopup: function (data, e) {
+                this.dataToPopup = {
+                    data: data,
+                    coords: {
+                        x: e.clientX,
+                        y: e.clientY
+                    }
+                }
+            },
+            hidePopup: function () {
+                this.dataToPopup = {
+                    data: null,
+                    coords: {
+                        x: null,
+                        y: null
+                    }
+                }
             }
         }
     }
@@ -537,6 +577,7 @@
         border-radius: 5px;
         cursor: pointer;
         transition: 0.1s;
+        z-index: 20;
     }
 
     .test_button:hover {
