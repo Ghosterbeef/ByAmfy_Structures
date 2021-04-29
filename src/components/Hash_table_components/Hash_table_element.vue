@@ -56,21 +56,27 @@
 
 <style>
     .table_element {
+        width: 100%;
         display: grid;
-        grid-template-columns: repeat(5, 1fr);
+        grid-template-columns: repeat(5, minmax(30px, 1fr));
         margin: 5px 0 5px;
         background-color: white;
     }
 
     .table_element:hover {
-        background-color: #8CC271;
+        background-color: #69BEEB;
     }
 
     .element_text {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         border: 1px solid black;
         text-align: center;
         color: black;
+        overflow: hidden;
         text-overflow: ellipsis;
+        height: 30px;
     }
 
 </style>

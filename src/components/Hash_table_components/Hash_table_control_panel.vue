@@ -9,12 +9,21 @@
         <button class="addElement-btn" @click.prevent="addElement" @mouseup="deleteFocus">Добавить</button>
         <button class="searchElement-btn" @click.prevent="searchElement" @mouseup="deleteFocus">Поиск</button>
         <button class="deleteElement-btn" @click.prevent="deleteElement" @mouseup="deleteFocus">Удалить</button>
+        <button class="rollBack-btn" @click.prevent="rollBack" @mouseup="deleteFocus"  :disabled="length===0">
+            <img src="../../assets/Icons/rollBack1.svg" alt="Откат">
+        </button>
     </div>
 </template>
 
 <script>
     export default {
         name: "Hash_table_control_panel",
+        props:{
+          length: {
+              type: Number,
+              required: true
+          }
+        },
         data() {
             return {
                 formData: {
@@ -66,6 +75,9 @@
                     this.formData.age = this.formData.surname = this.formData.name = this.formData.patronymic = ""
                 }
             },
+            rollBack: function(){
+                this.$emit("rollBack")
+            },
             deleteFocus: function (e) {
                 e.target.blur()
             }
@@ -109,6 +121,13 @@
         color: red;
     }
 
+    .rollBack-btn{
+        background-color: white;
+        border: 2px solid black;
+        color: black;
+    }
+
+
     .addElement-btn:hover,.addElement-btn:focus {
         color: white;
         background-color: lime;
@@ -122,6 +141,20 @@
     .deleteElement-btn:hover,.deleteElement-btn:focus {
         color: white;
         background-color: red;
+    }
+
+    .rollBack-btn:hover,.rollBack-btn:focus {
+        background-color: lightgrey;
+    }
+
+    .rollBack-btn:disabled{
+        background-color: white;
+        border: 2px solid rgba(0, 0, 0, 0.5);
+        color: rgba(0, 0, 0, 0.5);
+    }
+
+    .rollBack-btn:disabled:hover{
+        cursor: default;
     }
 
     form {

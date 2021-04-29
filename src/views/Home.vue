@@ -2,7 +2,7 @@
     <div class="home-section">
         <div class="container">
             <nav>
-                <router-link to="/avl_tree" @click="linkClicked">
+                <router-link to="/avl_tree">
                     <h2>AVL дерево</h2>
                 </router-link>
                 <router-link to="/b_tree">
