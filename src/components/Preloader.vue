@@ -1,9 +1,9 @@
 <template>
     <div class="preloader" v-if="!isLoaded">
-        <div class="cube"></div>
-        <div class="cube"></div>
-        <div class="cube"></div>
-        <div class="cube"></div>
+        <div class="cube">A</div>
+        <div class="cube">M</div>
+        <div class="cube">F</div>
+        <div class="cube">Y</div>
     </div>
 </template>
 
@@ -45,6 +45,12 @@
 
 
     .cube {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-weight: bold;
+        font-size: 1.3rem;
         width: 40px;
         height: 40px;
         margin-right: 10px;
@@ -57,10 +63,12 @@
 
     .cube:nth-child(2) {
         background-color: #8CC271;
+        animation: rightLilBit 1s infinite 0.5s;
     }
 
     .cube:nth-child(3) {
         background-color: #E9643B;
+        animation: leftLilBit 1s infinite 1s;
     }
 
     .cube:nth-child(4) {
@@ -72,6 +80,19 @@
         40% {
             transform: translateX(-60px);
         }
+
+        47%{
+            transform: translateX(10px);
+        }
+        50% {
+            transform: translateX(0);
+        }
+    }
+
+    @keyframes leftLilBit {
+        10% {
+            transform: translateX(-5px);
+        }
         50% {
             transform: translateX(0);
         }
@@ -80,6 +101,19 @@
     @keyframes right {
         40% {
             transform: translateX(60px);
+        }
+        47%{
+            transform: translateX(-10px);
+        }
+
+        50% {
+            transform: translateX(0);
+        }
+    }
+
+    @keyframes rightLilBit {
+        10% {
+            transform: translateX(5px);
         }
         50% {
             transform: translateX(0);
