@@ -1,10 +1,12 @@
 <template>
     <div class="not_found-section">
         <div class="container">
-            <div class="message">
-                <h1>Такую страничку не сделала =)</h1>
-                <h2>Простите, у меня лапки!</h2>
-                <img src="../assets/Cat.png" alt="Cat">
+            <div class="wrapper">
+                <div class="message">
+                    <h1>Такую страничку не сделала =)</h1>
+                    <h2>Простите, у меня лапки!</h2>
+                    <img src="../assets/Cat.png" alt="Cat">
+                </div>
             </div>
         </div>
     </div>
@@ -19,18 +21,23 @@
 <style scoped>
     .not_found-section {
         width: 100%;
-        max-height: 50vh;
         display: flex;
         justify-content: center;
     }
 
-    .message{
+    .wrapper{
+        width: 100%;
+        padding-top: 255px;
+        padding-bottom: 100px;
+    }
+
+    .message {
+        padding: 10px;
         position: relative;
         width: 100%;
         box-shadow: 0 0 25px 7px darkgrey;
         min-height: 400px;
         border: 1px solid gray;
-        margin-top: 340px;
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
@@ -38,11 +45,12 @@
     }
 
 
-    img{
-        height: 420px;
+    img {
+        top: -288px;
+        width: 500px;
+        height: 360px;
         position: absolute;
-        top: -295px;
-        left: calc(50% - 210px);
+        left: calc(50% - 250px);
     }
 
 
