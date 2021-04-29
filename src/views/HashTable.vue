@@ -1,3 +1,4 @@
+<!--suppress ALL -->
 <template>
     <div class="hash-table_section">
         <div class="container">
