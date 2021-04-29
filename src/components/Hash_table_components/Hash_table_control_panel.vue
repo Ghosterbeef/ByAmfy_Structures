@@ -9,20 +9,23 @@
         <button class="addElement-btn" @click.prevent="addElement" @mouseup="deleteFocus">Добавить</button>
         <button class="searchElement-btn" @click.prevent="searchElement" @mouseup="deleteFocus">Поиск</button>
         <button class="deleteElement-btn" @click.prevent="deleteElement" @mouseup="deleteFocus">Удалить</button>
-        <button class="rollBack-btn" @click.prevent="rollBack" @mouseup="deleteFocus"  :disabled="length===0">
-            <img src="../../assets/Icons/rollBack1.svg" alt="Откат">
-        </button>
+        <div class="rollBack_btn-container">
+            <button class="rollBack-btn" @click.prevent="rollBack" @mouseup="deleteFocus" :disabled="length===0">
+                <img src="../../assets/Icons/rollBack1.svg" alt="Откат">
+            </button>
+            <p v-if="length!==0" class="length">{{length}}</p>
+        </div>
     </div>
 </template>
 
 <script>
     export default {
         name: "Hash_table_control_panel",
-        props:{
-          length: {
-              type: Number,
-              required: true
-          }
+        props: {
+            length: {
+                type: Number,
+                required: true
+            }
         },
         data() {
             return {
@@ -75,7 +78,7 @@
                     this.formData.age = this.formData.surname = this.formData.name = this.formData.patronymic = ""
                 }
             },
-            rollBack: function(){
+            rollBack: function () {
                 this.$emit("rollBack")
             },
             deleteFocus: function (e) {
@@ -121,40 +124,52 @@
         color: red;
     }
 
-    .rollBack-btn{
+    .rollBack-btn {
         background-color: white;
         border: 2px solid black;
         color: black;
     }
 
 
-    .addElement-btn:hover,.addElement-btn:focus {
+    .addElement-btn:hover, .addElement-btn:focus {
         color: white;
         background-color: lime;
     }
 
-    .searchElement-btn:hover,.searchElement-btn:focus {
+    .searchElement-btn:hover, .searchElement-btn:focus {
         color: white;
         background-color: blueviolet;
     }
 
-    .deleteElement-btn:hover,.deleteElement-btn:focus {
+    .deleteElement-btn:hover, .deleteElement-btn:focus {
         color: white;
         background-color: red;
     }
 
-    .rollBack-btn:hover,.rollBack-btn:focus {
+    .rollBack-btn:hover, .rollBack-btn:focus {
         background-color: lightgrey;
     }
 
-    .rollBack-btn:disabled{
+    .rollBack-btn:disabled {
         background-color: white;
         border: 2px solid rgba(0, 0, 0, 0.5);
         color: rgba(0, 0, 0, 0.5);
     }
 
-    .rollBack-btn:disabled:hover{
+    .rollBack-btn:disabled:hover {
         cursor: default;
+    }
+
+    .rollBack_btn-container{
+        position: relative;
+    }
+
+    .length{
+        position: absolute;
+        right: 3px;
+        top: 22px;
+        color: black;
+        font-weight: bold;
     }
 
     form {
