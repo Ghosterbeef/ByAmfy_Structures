@@ -70,4 +70,26 @@
         align-items: center;
         justify-content: space-evenly;
     }
+
+    ::-webkit-scrollbar {
+        width: 15px;
+        height: 15px;
+        background-color: white;
+        border-top: 2px solid gray;
+        border-right: 2px solid gray;
+        border-bottom: 2px solid gray;
+        border-left: 1px solid gray;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        transition: 0.1s;
+        background: rgb(255,105,180);
+        background: linear-gradient(45deg, rgba(255,105,180,1) 0%, rgba(105,190,235,1) 100%);
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: rgba(255,105,180,0.7);
+        background: linear-gradient(45deg, rgba(255,105,180,0.7) 0%, rgba(105,190,235,0.7) 100%);
+    }
+
 </style>
