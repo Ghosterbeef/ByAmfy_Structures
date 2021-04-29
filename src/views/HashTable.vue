@@ -498,8 +498,8 @@
                 this.dataToPopup = {
                     data: data,
                     coords: {
-                        x: e.clientX,
-                        y: e.clientY
+                        x: e.pageX,
+                        y: e.pageY
                     }
                 }
             },

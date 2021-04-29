@@ -1,6 +1,9 @@
 <template>
     <div class="home-section">
         <div class="container">
+            <div class="rofl">
+                <router-link to="/NotFound">К котику!</router-link>
+            </div>
             <nav>
                 <router-link to="/avl_tree">
                     <h2>AVL дерево</h2>
@@ -28,6 +31,27 @@
         justify-content: center;
         align-items: center;
         min-height: 50vh;
+    }
+
+    .rofl{
+        position: absolute;
+        opacity: 0;
+        left: 50px;
+        top: 200px;
+        transition: 0.1s;
+    }
+
+    .rofl:hover{
+        opacity: 1;
+    }
+
+    .rofl a{
+        padding: 20px;
+        background-color: #69BEEB;
+        border-radius: 20px;
+        border: 2px solid #2c3e50;
+        text-decoration: none;
+        color: #2c3e50;
     }
 
     nav {
