@@ -170,6 +170,7 @@
         top: 22px;
         color: black;
         font-weight: bold;
+        background-color: white;
     }
 
     form {
