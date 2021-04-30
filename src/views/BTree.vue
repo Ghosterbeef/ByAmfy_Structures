@@ -311,6 +311,7 @@
 
 
     .b_tree_section {
+        max-width: 100vw;
         display: flex;
         justify-content: center;
     }
