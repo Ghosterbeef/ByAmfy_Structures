@@ -3,6 +3,7 @@ import Home from '../views/Home'
 import AVL_Tree from "../views/AVL_Tree";
 import BTree from "../views/BTree";
 import HashTable from "../views/HashTable";
+import NotFound from "../views/404"
 const routes = [
     {
         path: '/',
@@ -38,7 +39,8 @@ const routes = [
         path: '/NotFound',
         name: '404',
         meta: {title: "Страничка не найдена"},
-        component: () => import('../views/404')
+        component: NotFound
+        //component: () => import('../views/404')
     },
     {
         path: '/:catchAll(.*)',
