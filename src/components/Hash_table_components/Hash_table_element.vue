@@ -38,16 +38,18 @@
                 let data
                 if (e.target.tagName !== "div")
                     data = {
-                    surname: e.target.closest("div").childNodes[1].textContent,
-                    name: e.target.closest("div").childNodes[2].textContent,
-                    patronymic: e.target.closest("div").childNodes[3].textContent,
-                    age: e.target.closest("div").childNodes[4].textContent}
+                        surname: e.target.closest("div").childNodes[1].textContent,
+                        name: e.target.closest("div").childNodes[2].textContent,
+                        patronymic: e.target.closest("div").childNodes[3].textContent,
+                        age: e.target.closest("div").childNodes[4].textContent
+                    }
                 else
                     data = {
                         surname: e.target.childNodes[1].textContent,
                         name: e.target.childNodes[2].textContent,
                         patronymic: e.target.childNodes[3].textContent,
-                        age: e.target.childNodes[4].textContent}
+                        age: e.target.childNodes[4].textContent
+                    }
                 this.$emit('onElementClick', data, e)
             }
         }
@@ -58,7 +60,7 @@
     .table_element {
         width: 100%;
         display: grid;
-        grid-template-columns: repeat(5, minmax(30px, 1fr));
+        grid-template-columns: repeat(5, minmax(0, 1fr));
         margin: 5px 0 5px;
         background-color: white;
     }
@@ -68,14 +70,12 @@
     }
 
     .element_text {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        line-height: 30px;
+        overflow: hidden;
+        text-overflow: ellipsis;
         border: 1px solid black;
         text-align: center;
         color: black;
-        overflow: hidden;
-        text-overflow: ellipsis;
         height: 30px;
     }
 
